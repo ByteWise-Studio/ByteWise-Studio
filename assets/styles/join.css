@@ -1,0 +1,25 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+.join-container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.job-card {
+    margin-bottom: 20px;
+}
+.benefits-list {
+    margin: 20px 0;
+}
+.benefit-item {
+    padding: 20px;
+    text-align: center;
+}
+.join-container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-bottom: 40px;
+}

@@ -1,0 +1,43 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+.home-container {
+    padding: 20px;
+}
+.banner {
+    height: 500px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    margin-bottom: 40px;
+}
+.feature-section {
+    margin: 40px 0;
+}
+.feature-card {
+    height: 200px;
+    text-align: center;
+    padding: 20px;
+}
+.feature-icon {
+    font-size: 40px;
+    margin-bottom: 20px;
+}
+.home-container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-bottom: 40px;
+}
+.banner-btn {
+    transition: all 0.3s ease !important;
+}
+.banner-btn:hover {
+    background-color: white !important;
+    color: #667eea !important; /* 使用banner的渐变色之一 */
+    border-color: white !important;
+}

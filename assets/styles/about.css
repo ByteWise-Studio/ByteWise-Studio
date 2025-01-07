@@ -1,0 +1,25 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+.about-container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.company-intro {
+    text-align: center;
+    margin-bottom: 40px;
+}
+.milestone-year {
+    font-size: 24px;
+    font-weight: bold;
+    color: #409EFF;
+}
+.about-container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-bottom: 40px;
+}
+
