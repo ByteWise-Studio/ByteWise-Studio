@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ByteWise Studio | 字节智创</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <link rel="stylesheet" href="assets/styles/index.css">
+    <link rel="stylesheet" href="assets/styles/styles.css">
+</head>
+<body>
+    <div id="app">
+        <header :class="['header', {'header-blur': !isTop}]">
+            <div class="logo">ByteWise Studio</div>
+            <nav class="nav-menu">
+                <div 
+                    v-for="(item, index) in navItems" 
+                    :key="index"
+                    :class="['nav-item', {active: currentPage === item.path}]"
+                    @click="changePage(item.path)"
+                >
+                    {{ item.name }}
+                </div>
+            </nav>
+        </header>
+        <main class="main-content">
+            <iframe 
+                :src="currentPageUrl" 
+                class="page-iframe"
+                frameborder="0"
+            ></iframe>
+        </main>
+        <el-dialog
+        :visible.sync="dialogVisible"
+        title="确认访问"
+        width="30%">
+        <span>是否访问 "{{targetUrl}}"？</span>
+        <span slot="footer" class="dialog-footer">
+            <el-button @click="dialogVisible = false">取消</el-button>
+            <el-button type="primary" @click="confirmNavigation">确认</el-button>
+        </span>
+    </el-dialog>
+    </div>
+    <script src="assets/scripts/index.js"></script>
+</body>
+</html>

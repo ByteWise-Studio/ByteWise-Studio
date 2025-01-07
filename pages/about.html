@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>关于我们 - ByteWise Studio</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <link rel="stylesheet" href="../assets/styles/public_page.css">
+    <link rel="stylesheet" href="../assets/styles/about.css">
+    <link rel="stylesheet" href="../assets/styles/styles.css">
+</head>
+<body>
+    <div id="app">
+        <div class="about-container">
+            <div class="company-intro">
+                <h1>关于 ByteWise Studio</h1>
+                <p style="margin: 20px 0;">
+                    ByteWise Studio 成立于2022年，是一支专注于技术创新的团队。
+                    我们致力于将前沿技术转化为实用的产品和服务，为大众创造价值。
+                </p>
+            </div>
+            <el-row :gutter="20">
+                <el-col :span="12">
+                    <el-card>
+                        <div slot="header">
+                            <span>我们的愿景</span>
+                        </div>
+                        <p>成为全球领先的技术创新团队，用科技改变世界。</p>
+                    </el-card>
+                </el-col>
+                <el-col :span="12">
+                    <el-card>
+                        <div slot="header">
+                            <span>我们的使命</span>
+                        </div>
+                        <p>通过持续创新，为用户提供更好的产品和服务。</p>
+                    </el-card>
+                </el-col>
+            </el-row>
+            <div style="margin-top: 40px;">
+                <h2>发展历程</h2>
+                <el-timeline>
+                    <el-timeline-item
+                        v-for="milestone in milestones"
+                        :key="milestone.year"
+                        :timestamp="milestone.year"
+                        placement="top"
+                    >
+                        <el-card>
+                            <h4>{{ milestone.title }}</h4>
+                            <p>{{ milestone.content }}</p>
+                        </el-card>
+                    </el-timeline-item>
+                </el-timeline>
+            </div>
+        </div>
+        <el-dialog
+        :visible.sync="dialogVisible"
+        title="确认访问"
+        width="30%">
+        <span>是否访问 "{{targetUrl}}"？</span>
+        <span slot="footer" class="dialog-footer">
+            <el-button @click="dialogVisible = false">取消</el-button>
+            <el-button type="primary" @click="confirmNavigation">确认</el-button>
+        </span>
+    </el-dialog>
+    <footer class="footer">
+        <div class="friend-links">
+            <a href="https://www.baidu.com">百度搜索</a>
+            <a href="https://www.google.com">谷歌搜索</a>
+            <a href="https://www.bing.com">必应搜索</a>
+        </div>
+        <div class="beian">
+            © 2024 ByteWise Studio - 京ICP备XXXXXXXX号
+        </div>
+    </footer>
+    </div>
+    <script src="../assets/scripts/about.js"></script>
+</body>
+</html> 

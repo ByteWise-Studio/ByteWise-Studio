@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>产品详情 - ByteWise Studio</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <link rel="stylesheet" href="../assets/styles/products.css">
+    <link rel="stylesheet" href="../assets/styles/public_page.css">
+    <link rel="stylesheet" href="../assets/styles/styles.css">
+</head>
+<body>
+    <div id="app">
+        <div class="products-container">
+            <div class="main-content-area">
+                <el-tabs v-model="activeTab">
+                    <el-tab-pane 
+                        v-for="category in categories" 
+                        :key="category.name"
+                        :label="category.label" 
+                        :name="category.name"
+                    >
+                        <el-row :gutter="20">
+                            <el-col :span="8" v-for="product in category.products" :key="product.id">
+                                <el-card class="product-card" shadow="hover">
+                                    <img :src="product.image" class="product-image">
+                                    <h3>{{ product.name }}</h3>
+                                    <p>{{ product.description }}</p>
+                                    <div style="margin-top: 15px;">
+                                        <el-button type="primary" size="small" @click="showProductDetail(product)">了解详情</el-button>
+                                        <el-button v-if="product.downloadable" size="small" @click="showDownloadDialog(product)">立即下载</el-button>
+                                    </div>
+                                </el-card>
+                            </el-col>
+                        </el-row>
+                    </el-tab-pane>
+                </el-tabs>
+
+                <el-dialog
+                    :title="selectedProduct.name"
+                    :visible.sync="productDialogVisible"
+                    width="60%"
+                    :before-close="handleClose">
+                    <div class="product-detail">
+                        <img :src="selectedProduct.detailImage || selectedProduct.image" class="detail-image">
+                        <div class="detail-content">
+                            <h2>{{ selectedProduct.name }}</h2>
+                            <div class="detail-description" v-html="selectedProduct.detailDescription"></div>
+                        </div>
+                    </div>
+                    <span slot="footer" class="dialog-footer">
+                        <el-button @click="productDialogVisible = false">关闭</el-button>
+                        <el-button v-if="selectedProduct.downloadable" type="primary" @click="showDownloadDialog()">立即下载</el-button>
+                    </span>
+                </el-dialog>
+
+                <el-dialog
+                    title="选择下载版本"
+                    :visible.sync="downloadDialogVisible"
+                    width="30%"
+                    center>
+                    <div class="download-options">
+                        <div v-for="(download, index) in selectedProduct.downloads" :key="index" class="download-item">
+                            <span>{{ download.name }}</span>
+                            <el-button 
+                                :type="index === 0 ? 'primary' : ''" 
+                                size="small" 
+                                @click="handleDownload(download.url)">
+                                下载
+                            </el-button>
+                        </div>
+                    </div>
+                </el-dialog>
+
+                <el-dialog
+                    :visible.sync="navigationDialogVisible"
+                    title="确认访问"
+                    width="30%">
+                    <span>是否访问 "{{targetUrl}}"？</span>
+                    <span slot="footer" class="dialog-footer">
+                        <el-button @click="navigationDialogVisible = false">取消</el-button>
+                        <el-button type="primary" @click="confirmNavigation">确认</el-button>
+                    </span>
+                </el-dialog>
+            </div>
+        </div>
+        <footer class="footer">
+            <div class="friend-links">
+                <a href="https://www.baidu.com" @click.prevent="handleLinkClick">百度搜索</a>
+                <a href="https://www.google.com" @click.prevent="handleLinkClick">谷歌搜索</a>
+                <a href="https://www.bing.com" @click.prevent="handleLinkClick">必应搜索</a>
+            </div>
+            <div class="beian">
+                © 2024 ByteWise Studio - 京ICP备XXXXXXXX号
+            </div>
+        </footer>
+    </div>
+    <script src="../assets/scripts/products.js"></script>
+</body>
+</html> 

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>加入我们 - ByteWise Studio</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <link rel="stylesheet" href="../assets/styles/join.css">
+    <link rel="stylesheet" href="../assets/styles/public_page.css">
+    <link rel="stylesheet" href="../assets/styles/styles.css">
+</head>
+<body>
+    <div id="app">
+        <div class="join-container">
+            <el-row>
+                <el-col :span="24">
+                    <div style="text-align: center; margin-bottom: 40px;">
+                        <h1>加入我们</h1>
+                        <p>在这里，与优秀的人一起，做有趣的事</p>
+                    </div>
+                </el-col>
+            </el-row>
+            <h2>员工福利</h2>
+            <el-row :gutter="20" class="benefits-list">
+                <el-col :span="6" v-for="benefit in benefits" :key="benefit.title">
+                    <el-card class="benefit-item">
+                        <i :class="benefit.icon" style="font-size: 40px; color: #409EFF;"></i>
+                        <h3>{{ benefit.title }}</h3>
+                        <p>{{ benefit.description }}</p>
+                    </el-card>
+                </el-col>
+            </el-row>
+            <h2>职位列表</h2>
+            <el-card 
+                v-for="job in jobs" 
+                :key="job.id" 
+                class="job-card"
+                shadow="hover"
+            >
+                <el-row type="flex" justify="space-between" align="middle">
+                    <el-col :span="18">
+                        <h3>{{ job.title }}</h3>
+                        <p>{{ job.department }} | {{ job.location }}</p>
+                        <p>{{ job.description }}</p>
+                    </el-col>
+                    <el-col :span="6" style="text-align: right;">
+                        <el-button type="primary" @click="handleApply(job)">立即申请</el-button>
+                    </el-col>
+                </el-row>
+            </el-card>
+        </div>
+    <el-dialog
+    :visible.sync="dialogVisible"
+    title="确认访问"
+    width="30%">
+    <span>是否访问 "{{targetUrl}}"？</span>
+    <span slot="footer" class="dialog-footer">
+        <el-button @click="dialogVisible = false">取消</el-button>
+        <el-button type="primary" @click="confirmNavigation">确认</el-button>
+    </span>
+</el-dialog>
+<!-- 在 el-dialog 之前添加新的对话框 -->
+<el-dialog
+    :visible.sync="applyDialogVisible"
+    title="职位申请"
+    width="50%">
+    <div>
+        <h4>申请职位：{{ selectedJob ? selectedJob.title : '' }}</h4>
+        <p>{{ selectedJob ? selectedJob.description : '' }}</p>
+        
+        <el-form :model="applyForm" label-width="100px">
+            <el-form-item label="姓名" required>
+                <el-input v-model="applyForm.name" placeholder="请输入姓名"></el-input>
+            </el-form-item>
+            <el-form-item label="年龄" required>
+                <el-input v-model="applyForm.age" type="number" placeholder="请输入年龄"></el-input>
+            </el-form-item>
+            <el-form-item label="学习阶段" required>
+                <el-select v-model="applyForm.educationLevel" style="width: 100%" placeholder="请选择学习阶段">
+                    <el-option v-for="item in educationOptions" :key="item" :label="item" :value="item">
+                    </el-option>
+                </el-select>
+            </el-form-item>
+            <el-form-item label="年级" required>
+                <el-select v-model="applyForm.grade" style="width: 100%" placeholder="请选择年级">
+                    <el-option
+                        v-for="grade in gradeOptions[applyForm.educationLevel]"
+                        :key="grade"
+                        :label="grade"
+                        :value="grade">
+                    </el-option>
+                </el-select>
+            </el-form-item>
+            <el-form-item label="居住地" required>
+                <el-col :span="11">
+                    <el-input v-model="applyForm.province" placeholder="省份"></el-input>
+                </el-col>
+                <el-col :span="2" style="text-align: center">-</el-col>
+                <el-col :span="11">
+                    <el-input v-model="applyForm.city" placeholder="城市"></el-input>
+                </el-col>
+            </el-form-item>
+            <el-form-item label="电子邮件" required>
+                <el-input v-model="applyForm.email" type="email" placeholder="请输入电子邮件"></el-input>
+            </el-form-item>
+        </el-form>
+    </div>
+    <span slot="footer" class="dialog-footer">
+        <el-button @click="applyDialogVisible = false">取消</el-button>
+        <el-button type="primary" @click="submitApplication">确定</el-button>
+    </span>
+</el-dialog>
+</div>
+<footer class="footer">
+    <div class="friend-links">
+        <a href="https://www.baidu.com">百度搜索</a>
+        <a href="https://www.google.com">谷歌搜索</a>
+        <a href="https://www.bing.com">必应搜索</a>
+    </div>
+    <div class="beian">
+        © 2024 ByteWise Studio - 京ICP备XXXXXXXX号
+    </div>
+</footer>
+    </div>
+    <script src="../assets/scripts/join.js"></script>
+</body>
+</html> 
